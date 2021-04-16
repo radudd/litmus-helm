@@ -49,11 +49,5 @@ rules:
     apiGroups:
       - ""
     resources:
-      - serviceaccounts
-  - verbs:
-      - create
-    apiGroups:
-      - ""
-    resources:
       - configmaps
 {{ end }}
