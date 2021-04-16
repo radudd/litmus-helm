@@ -13,6 +13,7 @@ rules:
       - update
       - patch
       - delete
+      - deletecollection
     apiGroups:
       - ''
     resources:
@@ -54,6 +55,7 @@ rules:
   - verbs:
       - get
       - watch
+      - create
       - list
     apiGroups:
       - ""
@@ -68,6 +70,7 @@ rules:
       - workflowtemplates/finalizers
       - cronworkflows
       - cronworkflows/finalizers
+      - workfloweventbindings
     verbs:
       - create
       - delete
@@ -77,6 +80,9 @@ rules:
       - patch
       - update
       - watch
+  - apiGroups: ["argoproj.io"]
+    resources: ["rollouts"]
+    verbs: ["get","list"]
   - apiGroups:
       - ""
     resources:
@@ -88,8 +94,10 @@ rules:
       - ""
     resources:
       - secrets
+      - replicationcontrollers
     verbs:
       - get
+      - list
   - apiGroups:
       - ""
     resources:
@@ -106,4 +114,49 @@ rules:
       - create
       - get
       - delete
+  - apiGroups:
+      - eventtracker.litmuschaos.io
+    resources:
+      - eventtrackerpolicies
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - eventtracker.litmuschaos.io
+    resources:
+      - eventtrackerpolicies/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - ""
+      - extensions
+      - apps
+    resources:
+      - deployments
+      - daemonsets
+      - statefulsets
+      - replicasets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups: ["apps.openshift.io"]
+    resources: ["deploymentconfigs"]
+    verbs: ["get","list"]
+  - apiGroups: ["batch"]
+    resources: ["jobs"]
+    verbs: ["get","list","create","deletecollection"]
+  - apiGroups: [""]
+    resources: ["pods","pods/exec","configmaps","events","services"]
+    verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
+  - apiGroups: ["litmuschaos.io"]
+    resources: ["chaosengines","chaosexperiments","chaosresults"]
+    verbs: ["get","create","update","patch","delete","list","watch","deletecollection"]
 {{ end }}
