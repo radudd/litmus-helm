@@ -5,19 +5,55 @@ metadata:
   name: {{ include "litmus-portal.fullname" . }}-server
   namespace:  {{ .Release.Namespace }}
 rules:
-  - apiGroups:
-      - ""
-    resources:
-      - pods
-      - pods/exec
-    verbs:
+  - verbs:
       - create
       - patch
       - update
-  - apiGroups:
-      - "apps"
+    apiGroups:
+      - ''
+    resources:
+      - pods
+      - pods/exec
+  - verbs:
+      - create
+    apiGroups:
+      - apps
     resources:
       - deployments
-    verbs:
+  - verbs:
       - create
+    apiGroups:
+      - ""
+    resources:
+      - services
+  - verbs:
+      - create
+    apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - roles
+  - verbs:
+      - create
+    apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - rolebindings
+  - verbs:
+      - create
+    apiGroups:
+      - ""
+    resources:
+      - serviceaccounts
+  - verbs:
+      - create
+    apiGroups:
+      - ""
+    resources:
+      - serviceaccounts
+  - verbs:
+      - create
+    apiGroups:
+      - ""
+    resources:
+      - configmaps
 {{ end }}
