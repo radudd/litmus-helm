@@ -7,13 +7,18 @@ metadata:
 rules:
   - verbs:
       - create
-      - patch
+      - get
+      - list
+      - watch
       - update
+      - patch
+      - delete
     apiGroups:
       - ''
     resources:
       - pods
       - pods/exec
+      - pods/log
   - verbs:
       - create
     apiGroups:
@@ -40,14 +45,65 @@ rules:
       - rolebindings
   - verbs:
       - create
+      - get
+      - list
     apiGroups:
       - ""
     resources:
       - serviceaccounts
   - verbs:
-      - create
+      - get
+      - watch
+      - list
     apiGroups:
       - ""
     resources:
       - configmaps
+  - apiGroups:
+      - argoproj.io
+    resources:
+      - workflows
+      - workflows/finalizers
+      - workflowtemplates
+      - workflowtemplates/finalizers
+      - cronworkflows
+      - cronworkflows/finalizers
+    verbs:
+      - create
+      - delete
+      - deletecollection
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - persistentvolumeclaims
+    verbs:
+      - create
+      - delete
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - get
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - watch
+      - patch
+  - apiGroups:
+      - "policy"
+    resources:
+      - poddisruptionbudgets
+    verbs:
+      - create
+      - get
+      - delete
 {{ end }}
