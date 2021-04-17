@@ -28,6 +28,12 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts: []
 
+route:
+  enabled: false
+  name: litmus-portal
+  annotations: {}
+  host: ""
+
 portal:
   frontend:
     replicas: 1
