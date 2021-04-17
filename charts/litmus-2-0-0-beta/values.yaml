@@ -28,6 +28,7 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts: []
 
+# OpenShift Route
 route:
   enabled: false
   name: litmus-portal
